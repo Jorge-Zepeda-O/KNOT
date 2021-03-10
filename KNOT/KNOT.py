@@ -1,2 +1,0 @@
-#%% IMPORTS %%#
-print("hello world")

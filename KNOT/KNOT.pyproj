@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>3068caf8-373c-4c59-ab53-d901fe5719ee</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>KNOT.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,7 +21,33 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="KNOT.py" />
+    <Compile Include="crop.py" />
+    <Compile Include="main.py" />
+    <Compile Include="simulate.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="USER.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_CREATE.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_INITIALIZE.py" />
+    <Compile Include="_RECOVER.py" />
+    <Compile Include="_SEGMENT.py" />
+    <Compile Include="_TRACK.py" />
+    <Compile Include="__ENUM.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__FUNCTION.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__OPERATION.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__VISUALS.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

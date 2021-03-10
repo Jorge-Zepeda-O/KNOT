@@ -712,6 +712,8 @@ class Particle:
 		
 		# Give the final score to each candidate #
 		score = score_rho + np.sum(score_phi, axis=1)
+		#score_ang = np.prod(score_phi, axis=1)
+		#score = (score_rho + score_ang)/2 + np.sqrt(score_rho * score_ang)
 		
 		if(any(score > score_min * frm**2)):
 			# Get the best candidate #
@@ -739,9 +741,6 @@ class Particle:
 			return Particle([*self.cloud, cand[best]], hist=[hist_rho_, hist_phi_]), best
 		else:
 			return None, -1
-
-		#score_ang = np.prod(score_phi, axis=1)
-		#score = (score_rho + score_ang)/2 + np.sqrt(score_rho * score_ang)
 	def Sublink(self, cand, fdist, err_min=0.1):
 		# The principle here is that the candidates are close enough that if you find another candidate that shares a similar self-SFD than you, it's probably your continuation. This is primarily to remove links to the side spirals. #
 		## Initialize ##

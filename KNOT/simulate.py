@@ -28,8 +28,6 @@ OP._MakeDir(OP.FOLD_KER)
 OP._MakeDir(OP.FOLD_IMG)
 
 OP._MakeDir(OP.FOLD_SIM)
-OP._MakeDir(OP.FOLD_TMP)
-OP._MakeDir(OP.FOLD_EVL)
 OP._MakeDir(OP.FOLD_MAT)
 
 OP._MakeDir(OP.FOLD_TRUE)
@@ -61,7 +59,7 @@ OP._SaveMov(scope.img, code, OP.FOLD_SIM, fmt=FMT.GIF)
 OP._SaveMov(scope.img, code, OP.FOLD_SIM, fmt=FMT.TIF)
 OP._SaveSim(scope.mot, code)
 OP._SaveMot(mot, code)
-spi.savemat(code + '.mat', {'mot':mot})
+#spi.savemat(code + '.mat', {'mot':mot})
 
 ### Visualization ###
 plt.figure(figsize=(4,4))

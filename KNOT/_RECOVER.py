@@ -271,6 +271,7 @@ def _Chunk(img, *, C=64):
 	sz = np.shape(img)
 	X = sz[1]
 	Y = sz[0]
+
 	"""
 	cX = int(np.ceil((4*X)/(3*C)))
 	cY = int(np.ceil((4*Y)/(3*C)))

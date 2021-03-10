@@ -38,12 +38,7 @@ def RUN(pos, wgt, img, *, code='', update=False, visual=False):
 		clouds = []
 		for c in range(len(clouds_json)):
 			cloud = np.array(clouds_json[c])
-			#cloud[:,2] = (cloud[:,2] + 7) % 13
 			clouds.append(PointCloud(cloud))
-
-		#clouds = [PointCloud(np.array(clouds_json[c])) for c in range(len(clouds_json))]
-		#for c in clouds:
-		#	c.pos[:,2] = (c.pos[:,2] + 7) % 15
 
 	## Visualization query ##
 	if(visual):

@@ -172,8 +172,6 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 					timers[f] = time.time() - stpwch
 			psi_f[:,zrng[0]:zrng[1],...] /= np.maximum(overlay, 1)
 
-			#psi_f[:,zrng,...] = admm.Recover(img_, code=code, pb=pb, vis=False)
-
 		# Identify points in the cloud #
 		Psi_f = npf.fftn(psi_f)
 		psi_a = np.real_if_close(npf.ifftshift(npf.ifftn(Psi_f * H_A), axes=(-2,-1)))
@@ -199,29 +197,18 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 
 			ax = plt.axes(position=[2/3,0,1/3,0.9])
 			ax.imshow(img_, cmap='gray')
-			ax.scatter(pos[f][:,0], pos[f][:,1], s=100*wgt[f], c='r')
+			ax.scatter(pos[f][:,0], pos[f][:,1], s=100*(wgt[f]/np.max(wgt[f])), c='r')
 			ax.set_title('Point Cloud')
 
-			"""
-			plt.figure(figsize=(10,5))
-			ax = plt.axes(position=[0,0,1/2,0.9])
-			ax.imshow(np.sum(lhs, axis=(0,1)))
-
-			ax = plt.axes(position=[1/2,0,1/2,0.9])
-			ax.imshow(np.sum(rhs, axis=(0,1)))
-			"""
-
-			#plt.figure()
-			#plt.imshow(ker_[0,0,:,:], cmap='gray')
-
-			plt.figure(figsize=(6, 6))
-			ax = plt.axes(projection='3d', position=[-0.05,-0.07,1.1,1.1])
-			#ax.set_xticklabels([])
-			#ax.set_yticklabels([])
-			ax.set_zticklabels([])
-			if(len(wgt[f]) > 0):
-				ax.scatter(pos[f][:,0], pos[f][:,1], pos[f][:,3], s=100*(wgt[f]/np.max(wgt[f])))
-			ax.view_init(azim=30, elev=10)
+			if(USER.KER_Z > 1):
+				plt.figure(figsize=(6, 6))
+				ax = plt.axes(projection='3d', position=[-0.05,-0.07,1.1,1.1])
+				if(len(wgt[f]) > 0):
+					ax.scatter(pos[f][:,0], pos[f][:,1], pos[f][:,2], s=100*(wgt[f]/np.max(wgt[f])))
+				ax.view_init(azim=30, elev=10)
+				ax.set_xlim(0, np.shape(img)[3])
+				ax.set_ylim(0, np.shape(img)[2])
+				ax.set_zlim(0, USER.KER_Z)
 			plt.show()
 
 		# Progress Display #

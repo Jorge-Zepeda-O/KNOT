@@ -259,3 +259,13 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/KNOT/Truth/*
+/KNOT/Temp/*
+/KNOT/Simulation/*
+/KNOT/Phase Masks/*
+/KNOT/Matlab/*
+/KNOT/Images/*
+/KNOT/Experiment/*
+/KNOT/Evaluation/*
+/KNOT/Apertures/*
+/KNOT/*.mat

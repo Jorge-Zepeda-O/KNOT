@@ -400,7 +400,7 @@ class Microscope:
 			mot = np.zeros((USER.SIM_FRAMES * USER.SIM_SUB, len(keys), 5))
 		for k in range(len(keys)):
 			# mot is [x, y, z, t, w] #
-			mot[:,k,:] = np.array([fxn_x[keys[k]](dom), fxn_y[keys[k]](dom), fxn_z[keys[k]](dom), dom, fxn_w[keys[k]](dom)]).T
+			mot[:,k,:] = np.array([-fxn_x[keys[k]](dom), fxn_y[keys[k]](dom), fxn_z[keys[k]](dom), dom, fxn_w[keys[k]](dom)]).T
 
 		## Simulate the image ##
 		# Make the appropriate kernel for each particle #

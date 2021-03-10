@@ -5,7 +5,7 @@ from __ENUM import PHASEMASK as PM
 
 #%% --- INSTRUMENT --- %%#
 ### Detector ###
-CHIP = 64 * np.ones(2, dtype=int)	# <int> Pixels along each dimension in the camera (May get updated as needed)
+CHIP = 128 * np.ones(2, dtype=int)	# <int> Pixels along each dimension in the camera (May get updated as needed)
 RES = 0.0685 * np.ones(2)			# <um> Lateral resolution		(67 nm ISBI | 68.5 nm ours)
 DOF = np.array([4.000, 1.600])		# <um> Axial depth of field		(3D DH PSF, Stretching Lobe)
 FRATE = 0.030						# <s> Frame rate of the camera	(30 ms ours)
@@ -40,9 +40,9 @@ SIM_KER = True		# <bool> Simulate the phase mask kernel?	#
 SIM_IMG = False		# <bool> Simulate the image?				#
 SIM_ART = False		# <bool> Simulate artifacts?				#
 
-SIM_FRAMES = 50		# <int> Number of frames to simulate		#
+SIM_FRAMES = 100		# <int> Number of frames to simulate		#
 SIM_SUB = 1			# <int> Number of sub-frame samples to simulate (if applicable) #
-FPS = 50			# <int> Frames per Second when simulating	#
+FPS = 40			# <int> Frames per Second when simulating	#
 
 #%% --- PROCESSING --- %%#
 ### Parallelization ###
@@ -53,7 +53,7 @@ PAR_CORES = 6		# <int> Number of paralell processes to open #
 PRE_BG = APR_RAD*4/3	# <#> Gaussian standard deviation for BG Sub filter				(4/3 R_apr) # 
 PRE_NS = APR_RAD*2/3	# <#> Lorentzian HWHM for noise suppression filter				(2/3 R_apr)	#
 PRE_LT = APR_RAD*9/3	# <#> Gaussian standard deviation for local threshold filter	(9/3 R_apr)	#
-PRE_TS = 200			# <int> Temporal smoothing length - set to zero if no smoothing (200 frames)#
+PRE_TS = 0				# <int> Temporal smoothing length - set to zero if no smoothing (0 frames)	#
 
 ### Recovery ###
 REC_CHUNK = False		# <bool> Chunk up the image when deconvolving? #

@@ -217,7 +217,8 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 		if(sum(timers > 0) > 1):
 			t_remain = (F-(f+1)) * np.mean(np.diff(timers[timers > 0]))
 			prefix = '(%s):\t%8.3f sec' % (code, timers[f])
-			suffix = '(Remain: %5.0f sec)' % (t_remain)
+			#suffix = '(Remain: %5.0f sec)' % (t_remain)
+			suffix = '(Remain: %3.0f:%2.0f:%2.0f)' % (t_remain // 3600, (t_remain % 3600) // 60, t_remain % 60)
 			VIS._ProgressBar(f+1, F, prefix=prefix, suffix=suffix)
 
 	#import scipy.io as spi
@@ -571,7 +572,8 @@ class ADMM:
 			timers[i] = time.time() - stpwch
 			if(i > 0):
 				prefix = '(%s):\t%8.3f sec' % (pb[0], pb[-2] + timers[i])
-				suffix = '(Remain: %5.0f sec)' % (pb[-1])
+				#suffix = '(Remain: %5.0f sec)' % (pb[-1])
+				suffix = '(Remain: %3.0f:%2.0f:%2.0f)  ' % (pb[-1] // 3600, (pb[-1] % 3600) // 60, pb[-1] % 60)
 				if(pb[4] > 1):	# Show Z progress #
 					VIS._ProgressBar(pb[1]+1, pb[2], sub_i=pb[3]+1, sub_I=pb[4], prefix=prefix, suffix=suffix)
 				elif(pb[6] > 1 or pb[8] > 1):			# Show chunked iteration progress #

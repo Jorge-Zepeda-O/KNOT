@@ -47,7 +47,9 @@ def RUN(code, *, update=False, visual=False):
 		VIS._VisImg(scope.ker[0,(USER.KER_Z)//4,:,:,], 550)
 		VIS._VisImg(scope.ker[0,(2*USER.KER_Z)//4,:,:,], 550, 550)
 		VIS._VisImg(scope.ker[0,(3*USER.KER_Z)//4,:,:,], 100, 550)
+		plt.pause(0.1)
 		plt.show()
+		
 	pass	# TODO #
 
 	## Output ##

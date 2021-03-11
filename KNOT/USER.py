@@ -57,7 +57,8 @@ PRE_TS = 0				# <int> Temporal smoothing length - set to zero if no smoothing (0
 
 ### Recovery ###
 REC_CHUNK = False		# <bool> Chunk up the image when deconvolving? #
-REC_ITER = 80 * (6 if(KER_Z>1) else 1) * (12 if(KER_T>1) else 1)	# It really shouldn't take this long #
+REC_ITER = 80 * (3 if(KER_Z>1) else 1) * (6 if(KER_T>1) else 1)
+#REC_ITER = 80 * (6 if(KER_Z>1) else 1) * (12 if(KER_T>1) else 1)	# It really shouldn't take this long #
 
 ### Identification ###
 SEG_RAD = np.sqrt(3)	# <#> Maximum distance between connected points - in *voxels*	#

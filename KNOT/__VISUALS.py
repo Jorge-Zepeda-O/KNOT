@@ -127,7 +127,7 @@ def _DispLineGrad(ax, seg, frm, color, bot=False, fmin=0, fmax=0, sat_rng=None, 
 	return crgb_rng
 def _VisImg(img, posx, posy=50, tru=None):
 	plt.figure()
-	plt.get_current_fig_manager().window.setGeometry(posx,posy,450,500)
+	#plt.get_current_fig_manager().window.setGeometry(posx,posy,450,500)
 	ax = plt.axes(position=[0,0,1,1])
 	ax.imshow(img, cmap='gray')
 	if(tru is not None):

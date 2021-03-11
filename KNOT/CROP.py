@@ -24,7 +24,7 @@ FOLD_EXP = DIR + '\\Experiment\\'
 OP._MakeDir(FOLD_EXP)	# Make the folder if it doesn't exist #
 
 # If you want to specify files in the folder, uncomment the second line, else comment it out to grab everything in the folder #
-#files = glob.glob(FOLD_EXP + '*.tif')
+files = glob.glob(FOLD_EXP + '*.tif')
 files = ['Test Data.tif']
 
 ## Additional parameters ##

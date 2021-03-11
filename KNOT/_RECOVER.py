@@ -197,7 +197,8 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 
 			ax = plt.axes(position=[2/3,0,1/3,0.9])
 			ax.imshow(img_, cmap='gray')
-			ax.scatter(pos[f][:,0], pos[f][:,1], s=100*(wgt[f]/np.max(wgt[f])), c='r')
+			if(len(wgt[f]) > 0):
+				ax.scatter(pos[f][:,0], pos[f][:,1], s=100*(wgt[f]/np.max(wgt[f])), c='r')
 			ax.set_title('Point Cloud')
 
 			if(USER.KER_Z > 1):

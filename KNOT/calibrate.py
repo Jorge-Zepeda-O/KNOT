@@ -1,6 +1,7 @@
 #%% --- IMPORTS --- %%#
 ### External ###
 import numpy as np
+import numpy.fft as npf
 import matplotlib.pyplot as plt
 
 ### Internal ###
@@ -17,6 +18,41 @@ import USER
 CodeCalib = 'roi_Test Data_(230,320)_(64x64)_(f100-101)'
 
 #%% FUNCTION DEFINITIONS %%#
+def Reconstruct(ker, pos, wgt):
+	# Recreate psi #
+	psi = np.zeros_like(ker)
+	for i in range(len(wgt)):
+		psi[0, int(pos[i,2]), int(pos[i,1]), int(pos[i,0])] = wgt[i]
+	Psi = npf.fftn(psi)
+	Ker = npf.fftn(ker)
+	img = npf.fftshift(npf.ifftn(Psi * Ker), axes=(0,1,2,3))
+	
+	fig, ax = plt.subplots(4, 4)
+	for i in range(4):
+		for j in range(4):
+			ax[i,j].imshow(np.real(psi[0,4*i+j,:,:]))
+
+	fig, ax = plt.subplots(4, 4)
+	for i in range(4):
+		for j in range(4):
+			ax[i,j].imshow(np.abs(Psi[0,4*i+j,:,:]))
+
+	psi_ = npf.ifftn(Psi)
+	fig, ax = plt.subplots(4, 4)
+	for i in range(4):
+		for j in range(4):
+			ax[i,j].imshow(np.abs(psi_[0,4*i+j,:,:]))
+	
+	plt.figure()
+	plt.imshow(np.sum(np.real(Ker), axis=(0,1)))
+
+	fig, ax = plt.subplots(4, 4)
+	for i in range(4):
+		for j in range(4):
+			ax[i,j].imshow(np.real(img[0,4*i+j,:,:]))
+
+	plt.show()
+	return np.sum(np.real(img), axis=(0,1))
 def Calibrate(fxn, x0, dx0, iter=3, vis=True):
 	# Initialize #
 	x = x0
@@ -39,7 +75,9 @@ def Calibrate(fxn, x0, dx0, iter=3, vis=True):
 		prec_m = np.mean([clouds_m[c].m2a for c in range(len(clouds_m))], axis=0)*1000
 		if(vis):
 			ax = plt.axes(position=[0,0,1/3,0.9])
-			ax.imshow(img_m[0,0,:,:], cmap='gray')
+			img = Reconstruct(scope_m.ker, pos_m[0], wgt_m[0])
+			ax.imshow(img)
+			#ax.imshow(img_m[0,0,:,:], cmap='gray')
 			ax.scatter(pos_m[0][:,0], pos_m[0][:,1], s=100*wgt_m[0], color='r')
 			ax.set_title("Error @ %0.3fum: %0.3fnm" % (x - dx, np.mean(prec_m)))
 			plt.draw()
@@ -100,15 +138,17 @@ def Calibrate(fxn, x0, dx0, iter=3, vis=True):
 	return x
 
 #%% RUNTIME %%#
+## Methods to mutate user parameters ##
 def SetSep(s): USER.KER_SEP = s
 def SetRad(r): USER.APR_RAD = r
 
+## Calibration ##
 if(USER.KER_Z > 1):
 	# Else there's no need to #
 	print("\nLobe Separation")
-	sep = Calibrate(SetSep, USER.KER_SEP, 0.2)
+	sep = Calibrate(SetSep, USER.KER_SEP, 0.2, vis=True)
 	print("Best value: %5.3f um" % (sep))
 
 print("\nAperture Radius")
-rad = Calibrate(SetRad, USER.APR_RAD, 0.1)
+rad = Calibrate(SetRad, USER.APR_RAD, 0.1, vis=True)
 print("Best value: %5.3f um" % (rad))

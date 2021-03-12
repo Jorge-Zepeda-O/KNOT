@@ -14,7 +14,7 @@ import __OPERATION as OP
 UPDATE = True	# Update rois?			#
 VISUAL = True	# Visualize results?	#
 
-Frames = [100, 101]		# <(f, f)> Frame range, does not include end frame. Zero indexed	#
+Frames = [100, 110]		# <(f, f)> Frame range, does not include end frame. Zero indexed	#
 Roi_cen = [230, 320]	# <(px, px)> Center point of the ROI								#
 Roi_size = [64, 64]		# <(px, px)> Size of the ROI. Keep equal! Else the phase mask simulates incorrectly (BUG) #
 

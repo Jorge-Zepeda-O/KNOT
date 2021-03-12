@@ -15,10 +15,10 @@ import _TRACK		as TRK
 #%% --- USER PARAMETERS --- %%#
 # Update/Visualize which saved values? #
 UPDATE = {'INI':True, 'PRE':True, 'REC':True, 'SEG':True, 'TRK':True}
-VISUAL = {'INI':True, 'PRE':False, 'REC':False, 'SEG':False, 'TRK':False}
+VISUAL = {'INI':False, 'PRE':False, 'REC':False, 'SEG':False, 'TRK':False}
 
 # Load in which images? #
-CODES = ['roi_Test Data_(300,300)_(256x256)_(f100-400)']
+CODES = ['roi_Test Data_(230,320)_(64x64)_(f100-110)']
 
 #%% INITIALIZATION %%#
 for code in CODES:

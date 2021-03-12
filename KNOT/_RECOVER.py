@@ -111,7 +111,7 @@ def TEST_LIMITS(img, ker, eps, *, code='', visual=False):
 def _IDFilters(sz, r_apr=1*USER.RES[0], r_seg=3*USER.RES[0]):
 	## Initialize ##
 	mesh_x, mesh_y = _MeshLat(*(sz[2:]), shift=True, scale=True)
-	mesh_z, mesh_t = _MeshMeta(ker_z=sz[0], ker_t=sz[1])
+	mesh_z, mesh_t = _MeshMeta(ker_z=sz[1], ker_t=sz[0])
 
 	zz, tt, yy, xx = np.meshgrid(mesh_z, mesh_t, mesh_y, mesh_x)
 	rr2 = xx**2 + yy**2 + zz**2 + (4*tt)**2	# How to accomodate t (1 frame max)? #
@@ -129,12 +129,11 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 	Z = np.shape(img)[1]
 	Y = np.shape(img)[2]
 	X = np.shape(img)[3]
-	T = np.shape(ker)[0]
 	C = np.minimum(X, Y) if((not USER.REC_CHUNK) or ((X <= 128) and (Y <= 128))) else 64
 
 	pos = [None] * F
 	wgt = [None] * F
-	H_A, H_S = _IDFilters([T, Z*np.shape(ker)[1], Y, X])
+	H_A, H_S = _IDFilters([np.shape(ker)[0], Z*np.shape(ker)[1], Y, X])
 
 	tru = OP._LoadTruth(code)
 

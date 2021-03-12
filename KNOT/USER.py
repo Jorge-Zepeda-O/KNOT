@@ -33,7 +33,7 @@ if((KER_Z > 1 or KER_T > 1) and (KER_TYPE == PM.HELIX)): APR_RAD *= 1.7
 KER_LOOP = 1								# <int> How many half-turns does the phase mask go through per frame? #
 KER_ROT = 1.000								# <# pi> How far the DH rotates at the ends #
 KER_SEP = 2*4*WAVELENGTH/(2*NA)				# <um> How far apart are the two DH lobes?	#
-KER_RNG = np.array([0/4*KER_SEP, KER_SEP])	# <um> How much does the DH lobes stretch?	#
+KER_RNG = np.array([2/3*KER_SEP, KER_SEP])	# <um> How much does the DH lobes stretch?	#
 
 #%% --- SIMULATION --- %%#
 SIM_KER = True		# <bool> Simulate the phase mask kernel?	#
@@ -50,9 +50,9 @@ PAR_FLAG = False	# <bool> Paralellize? (Not yet implemented)	 #
 PAR_CORES = 6		# <int> Number of paralell processes to open #
 
 ### Preprocessing ###
-PRE_BG = APR_RAD*4/3	# <#> Gaussian standard deviation for BG Sub filter				(4/3 R_apr) # 
+PRE_BG = APR_RAD*3/3	# <#> Gaussian standard deviation for BG Sub filter				(4/3 R_apr) # 
 PRE_NS = APR_RAD*2/3	# <#> Lorentzian HWHM for noise suppression filter				(2/3 R_apr)	#
-PRE_LT = APR_RAD*9/3	# <#> Gaussian standard deviation for local threshold filter	(9/3 R_apr)	#
+PRE_LT = APR_RAD*4/3	# <#> Gaussian standard deviation for local threshold filter	(9/3 R_apr)	#
 PRE_TS = 0				# <int> Temporal smoothing length - set to zero if no smoothing (0 frames)	#
 
 ### Recovery ###

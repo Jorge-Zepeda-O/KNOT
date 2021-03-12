@@ -109,7 +109,7 @@ def _FxnRot(ker_type=PM.NONE, loc_z=False, loc_t=False):
 		elif(loc_t):			# The double helix rotates with time #
 			return lambda f: (np.pi/USER.KER_LOOP) * f						# In frames #
 		else:					# The double helix rotates with depth #
-			return lambda z: (USER.KER_ROT*np.pi) * (1/2 - z/USER.DOF[0])	# In pixels #
+			return lambda z: -(USER.KER_ROT*np.pi) * (z/USER.DOF[0] + 1/2)	# In pixels #
 def _FxnSep(ker_type=PM.NONE, loc_z=False, loc_t=False):
 	## Output ##
 	if(ker_type == PM.NONE):
@@ -119,7 +119,7 @@ def _FxnSep(ker_type=PM.NONE, loc_z=False, loc_t=False):
 		if((not loc_z) and (not loc_t)):	# No double helix at all #
 			return lambda v: 0*v
 		elif(loc_z and (not loc_t)):	# The double helix stays at a constant separation #
-			return lambda z: USER.KER_SEP	# In microns #
+			return lambda z: USER.KER_SEP + 0*z	# In microns #
 		elif((not loc_z) and loc_t):	# The double helix stays at a constant separation #
 			return lambda t: USER.KER_SEP + 0*t	# In frames #
 		else:						# The double helix will stretch according to the depth of the emitter #
@@ -135,7 +135,7 @@ def _FxnStr(ker_type=PM.NONE, loc_z=False, loc_t=False):
 		elif(loc_z and (not loc_t)):	# The double helix symmetrically varies separation #
 			return lambda z: USER.KER_RNG[0] * np.abs(z/USER.DOF[0])	# In microns #
 		elif((not loc_z) and loc_t):	# The double helix stays at a constant separation #
-			return lambda t: USER.KER_SEP + 0*t	# In frames #
+			return lambda t: USER.KER_RNG[0] + 0*t	# In frames #
 		else:						# The double helix will stretch according to the depth of the emitter #
 			return lambda z: USER.KER_RNG[1] * (z/USER.DOF[1] + 1/2)	# In microns #
 
@@ -328,8 +328,8 @@ class Microscope:
 			for t in range(np.shape(mesh_t)[0]):
 				for p in range(np.shape(mesh_t)[1]):
 					# Define the positional phase shifts #
-					pos_x = mu * mot[t,p,0]
-					pos_y = nu * mot[t,p,1]
+					pos_x = nu * mot[t,p,0]
+					pos_y = mu * mot[t,p,1]
 					pos_i = mot[t,p,4]
 
 					# Evaluate the emitter response for this time point #

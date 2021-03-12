@@ -165,8 +165,8 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 				for n in range(N):
 					pb = (code, f,F, z,Z, m,M, n,N, timers[f - (1 if(M == 1 and N == 1 and f > 0) else 0)], t_remain)
 					if(np.ptp(img_chunks[n,m,...]) > 2*np.std(img_)):
-						psi, _ = admm.Recover(img_chunks[n,m,...], code=code, pb=pb, vis=False)
-						psi = np.fft.fftshift(psi, axes=(-2,-1))
+						psi, _ = admm.Recover(img_chunks[n,m,...], code=code, pb=pb, vis=vis)
+						psi = np.fft.fftshift(psi, axes=(-4,-3,-2,-1))
 						psi_f[:,zrng[0]:zrng[1],...][...,yrng[n,0]:yrng[n,1],:][...,xrng[m,0]:xrng[m,1]] += psi
 					timers[f] = time.time() - stpwch
 			psi_f[:,zrng[0]:zrng[1],...] /= np.maximum(overlay, 1)
@@ -180,7 +180,8 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 		lhs = psi_a
 		rhs = psi_s * (1 + 1 / eps_) + np.mean(psi_f) * (1 + (USER.KER_T > 1)) #eps_ * np.std(psi_f)/np.mean(psi_f)
 		idx = np.nonzero(lhs > rhs)
-		pos[f] = np.array([idx[3], idx[2], idx[1], idx[0]/USER.KER_T + f]).T
+		# The z axis is all kinds of crazy #
+		pos[f] = np.array([idx[3], idx[2], np.shape(ker)[1]-idx[1]-1, idx[0]/USER.KER_T + f]).T
 		wgt[f] = np.round(np.sqrt(psi_f**2 + ((psi_a + psi_s)/2)**2)[idx], 3)
 
 		# Visualization #
@@ -495,7 +496,7 @@ class ADMM:
 
 			# Perform Regularizations #
 			Psi = self.Reg_Accuracy(Psi, i)
-			Psi = self.Reg_Sparcity(Psi, 1)#np.minimum(np.maximum(2*i/USER.REC_ITER, 1/2), 3/2))
+			Psi = self.Reg_Sparcity(Psi, np.minimum(np.maximum(2*i/USER.REC_ITER, 1/2), 3/2))
 			Psi = self.Reg_Temporal(Psi)
 
 			# Copy in the new result #

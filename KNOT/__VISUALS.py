@@ -127,7 +127,7 @@ def _DispLineGrad(ax, seg, frm, color, bot=False, fmin=0, fmax=0, sat_rng=None, 
 	return crgb_rng
 def _VisImg(img, posx, posy=50, tru=None):
 	plt.figure()
-	#plt.get_current_fig_manager().window.setGeometry(posx,posy,450,500)
+	plt.get_current_fig_manager().window.setGeometry(posx,posy,450,500)
 	ax = plt.axes(position=[0,0,1,1])
 	ax.imshow(img, cmap='gray')
 	if(tru is not None):
@@ -277,9 +277,6 @@ def FIG2del(pos, wgt, img):
 	#	CHIP = 32x32
 	#	KER_Z = 18
 	#	REC_ITER = 0, 15, 60, 240
-
-	
-
 	## Initialize ##
 	F, Z, Y, X = np.shape(img)
 	clr = [(0.1,0.5,0.7), (1.0,0.2,0.5), (1.0,0.6,0.3)]

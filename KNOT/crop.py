@@ -14,9 +14,9 @@ import __OPERATION as OP
 UPDATE = True	# Update rois?			#
 VISUAL = True	# Visualize results?	#
 
-Frames = [100, 110]		# <(f, f)> Frame range, does not include end frame. Zero indexed	#
-Roi_cen = [230, 320]	# <(px, px)> Center point of the ROI								#
-Roi_size = [64, 64]		# <(px, px)> Size of the ROI. Keep equal! Else the phase mask simulates incorrectly (BUG) #
+Frames = [0, 1]		# <(f, f)> Frame range, does not include end frame. Zero indexed	#
+Roi_cen = [100, 250]	# <(px, px)> Center point of the ROI								#
+Roi_size = [96, 96]		# <(px, px)> Size of the ROI. Keep equal! Else the phase mask simulates incorrectly (BUG) #
 
 ## Files for processing ##
 DIR = path.dirname(path.abspath(__file__))
@@ -25,7 +25,7 @@ OP._MakeDir(FOLD_EXP)	# Make the folder if it doesn't exist #
 
 # If you want to specify files in the folder, uncomment the second line, else comment it out to grab everything in the folder #
 files = glob.glob(FOLD_EXP + '*.tif')
-files = ['Test Data.tif']
+files = ['344SQ Cell 6.tif']
 
 ## Additional parameters ##
 # Construct the x and y ranges for cropping #
@@ -71,6 +71,6 @@ for f in files:
 	# Cropping #
 	if(not UPDATE and path.exists(FOLD_EXP + 'roi_' + filename[:-4] + footer + '.tif')): continue
 	data = data[Frames[0]:Frames[1],:,:][:,rng_y,:][:,:,rng_x]
-	imageio.mimwrite(FOLD_EXP + 'roi_' + filename[:-4] + footer + '.tif', data.astype(np.uint16))
+	imageio.mimwrite(OP.FOLD_IMG + 'roi_' + filename[:-4] + footer + '.tif', data.astype(np.uint16))
 	print('| Cropped |', end='\n')
 print("Finished!")

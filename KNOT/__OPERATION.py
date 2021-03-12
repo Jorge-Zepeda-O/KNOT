@@ -137,8 +137,8 @@ def _SaveTracks(traj, code, *, snr=7, den='low', dset='VESICLE'):
 					% (f, p.res[c,0], p.res[c,1], p.res[c,2])
 			else:
 				# Interpolate through the blink #
-				c_hi = np.where(f < p.frm)[0][0]	# Last occurence #
-				c_lo = np.where(f > p.frm)[0][-1]	# First occurence #
+				c_hi = np.where(f < p.frm)[0][0]	# Last occurrence #
+				c_lo = np.where(f > p.frm)[0][-1]	# First occurrence #
 				
 				# Get linear interpolation coefficients #
 				hi_val = (p.frm[c_hi] - f)/(p.frm[c_hi] - p.frm[c_lo])

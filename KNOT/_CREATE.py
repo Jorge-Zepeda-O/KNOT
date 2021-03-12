@@ -79,8 +79,8 @@ def Test_Mixed():
 
 	# Function definition #
 	fxn_x[0] = FXN._Wiener(imp_x, 0.5, off=0, seed=1)
-	fxn_x[0] = FXN._Wiener(imp_x, 0.5, off=2.5, seed=2)
-	fxn_x[0] = FXN._Wiener(imp_x, 0.5, off=1, seed=3)
+	fxn_y[0] = FXN._Wiener(imp_y, 0.5, off=2.5, seed=2)
+	fxn_z[0] = FXN._Wiener(imp_z, 0.5, off=1, seed=3)
 
 	## Output ##
 	return fxn_x, fxn_y, fxn_z, fxn_w

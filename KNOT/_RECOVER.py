@@ -111,7 +111,7 @@ def TEST_LIMITS(img, ker, eps, *, code='', visual=False):
 def _IDFilters(sz, r_apr=1*USER.RES[0], r_seg=3*USER.RES[0]):
 	## Initialize ##
 	mesh_x, mesh_y = _MeshLat(*(sz[2:]), shift=True, scale=True)
-	mesh_z, mesh_t = _MeshMeta(ker_z=sz[0], ker_t=sz[1])
+	mesh_z, mesh_t = _MeshMeta(ker_z=sz[1], ker_t=sz[0])
 
 	zz, tt, yy, xx = np.meshgrid(mesh_z, mesh_t, mesh_y, mesh_x)
 	rr2 = xx**2 + yy**2 + zz**2 + (4*tt)**2	# How to accomodate t (1 frame max)? #
@@ -129,12 +129,11 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 	Z = np.shape(img)[1]
 	Y = np.shape(img)[2]
 	X = np.shape(img)[3]
-	T = np.shape(ker)[0]
 	C = np.minimum(X, Y) if((not USER.REC_CHUNK) or ((X <= 128) and (Y <= 128))) else 64
 
 	pos = [None] * F
 	wgt = [None] * F
-	H_A, H_S = _IDFilters([T, Z*np.shape(ker)[1], Y, X])
+	H_A, H_S = _IDFilters([np.shape(ker)[0], Z*np.shape(ker)[1], Y, X])
 
 	tru = OP._LoadTruth(code)
 
@@ -197,7 +196,8 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 
 			ax = plt.axes(position=[2/3,0,1/3,0.9])
 			ax.imshow(img_, cmap='gray')
-			ax.scatter(pos[f][:,0], pos[f][:,1], s=100*(wgt[f]/np.max(wgt[f])), c='r')
+			if(len(wgt[f]) > 0):
+				ax.scatter(pos[f][:,0], pos[f][:,1], s=100*(wgt[f]/np.max(wgt[f])), c='r')
 			ax.set_title('Point Cloud')
 
 			if(USER.KER_Z > 1):
@@ -216,7 +216,8 @@ def _Recover(img, ker, eps, *, code='', step=1, vis=False):
 		if(sum(timers > 0) > 1):
 			t_remain = (F-(f+1)) * np.mean(np.diff(timers[timers > 0]))
 			prefix = '(%s):\t%8.3f sec' % (code, timers[f])
-			suffix = '(Remain: %5.0f sec)' % (t_remain)
+			#suffix = '(Remain: %5.0f sec)' % (t_remain)
+			suffix = '(Remain: %3.0f:%2.0f:%2.0f)' % (t_remain // 3600, (t_remain % 3600) // 60, t_remain % 60)
 			VIS._ProgressBar(f+1, F, prefix=prefix, suffix=suffix)
 
 	#import scipy.io as spi
@@ -570,7 +571,8 @@ class ADMM:
 			timers[i] = time.time() - stpwch
 			if(i > 0):
 				prefix = '(%s):\t%8.3f sec' % (pb[0], pb[-2] + timers[i])
-				suffix = '(Remain: %5.0f sec)' % (pb[-1])
+				#suffix = '(Remain: %5.0f sec)' % (pb[-1])
+				suffix = '(Remain: %3.0f:%2.0f:%2.0f)  ' % (pb[-1] // 3600, (pb[-1] % 3600) // 60, pb[-1] % 60)
 				if(pb[4] > 1):	# Show Z progress #
 					VIS._ProgressBar(pb[1]+1, pb[2], sub_i=pb[3]+1, sub_I=pb[4], prefix=prefix, suffix=suffix)
 				elif(pb[6] > 1 or pb[8] > 1):			# Show chunked iteration progress #

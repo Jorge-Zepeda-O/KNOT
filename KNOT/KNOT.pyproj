@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>3068caf8-373c-4c59-ab53-d901fe5719ee</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>calibrate.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

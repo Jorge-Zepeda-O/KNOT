@@ -49,11 +49,11 @@ def RUN(clouds, img, *, code='', update=False, visual=False):
 		ax = plt.axes(position=[0,0,1,1])
 		ax.imshow(img[-1,0,:,:], cmap='gray')
 		k = 0
-		for c in clouds:
-			ax.scatter(c.pos[:,0], c.pos[:,1], s=100*c.wgt, linewidth=0, marker='o')
+		#for c in clouds:
+		#	ax.scatter(c.pos[:,0], c.pos[:,1], s=100*c.wgt, linewidth=0, marker='o')
 		for p in traj:
 			F = len(p.frm)
-			if(F < 2): continue
+			if(F < USER.TRK_MIN): continue
 			seg = [(p.res[f,:2].tolist(), p.res[f+1,:2].tolist()) for f in range(F-1)]
 			VIS._DispLineGrad(ax, seg, p.frm, clr[np.mod(k, len(clr))], linewidth=6)
 			k += 1
@@ -66,7 +66,7 @@ def RUN(clouds, img, *, code='', update=False, visual=False):
 		k = 0
 		for p in traj:
 			F = len(p.frm)
-			if(F < 2): continue
+			if(F < USER.TRK_MIN): continue
 			seg = [(p.res[f,:].tolist(), p.res[f+1,:].tolist()) for f in range(F-1)]
 			VIS._DispLineGrad(ax, seg, p.frm, clr[np.mod(k, len(clr))], linewidth=6)
 			k += 1

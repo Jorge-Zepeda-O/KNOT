@@ -217,8 +217,8 @@ def _Preprocess2(code, img, ker):
 	# Use to weight the mean #
 	eps_exp = np.sqrt(rat_min**2 + rat_avg**2 + rat_max**2)
 	eps_global = 0.0#np.mean(img)/np.std(img)
-	eps_ = np.sqrt(np.maximum(eps_mu**eps_exp - 1, 0) + 0*eps_var + eps_global)
-	eps_ = eps_[:,:,sz_off:-sz_off,:][:,:,:,sz_off:-sz_off]	# Truncate #
+	eps_ = np.sqrt(np.maximum(eps_mu**eps_exp - 1, 0) + 2*eps_var + eps_global)
+	eps_ = eps_[:,:,sz_off:-sz_off,:][:,:,:,sz_off:-sz_off] * USER.PRE_EPS	# Truncate #
 
 	## Output ##
 	prefix = '(%s):\t%8.3f sec' % (code, time.time() - stpwch)

@@ -15,9 +15,8 @@ import _TRACK		as TRK
 import USER
 
 #%% --- USER PARAMETERS --- %%#
-CodeCalib = 'roi_Test Data_(230,320)_(64x64)_(f100-101)'
-CodeCalib = 'roi_Test Data_(230,245)_(64x64)_(f100-101)'
-#CodeCalib = 'roi_344SQ Cell 6_(100,250)_(96x96)_(f0-1)'
+CodeCalib = 'roi_Test Bead_(230,320)_(64x64)_(f100-101)'
+#CodeCalib = 'roi_Test Cell_(280,240)_(64x64)_(f0-1)'
 
 #%% FUNCTION DEFINITIONS %%#
 def Reconstruct(ker, eps, pos, wgt):
@@ -84,9 +83,9 @@ def Calibrate(fxn, x0, dx0, strings, iter=5, vis=True):
 			img_p, ker_p, eps_p = PREP._Preprocess2(CodeCalib, scope_p.img, scope_p.ker)
 
 			# Recover positions #
-			[pos_m, wgt_m] = REC._Recover(img_m, ker_m, eps_m, code=CodeCalib)
-			[pos_0, wgt_0] = REC._Recover(img_0, ker_0, eps_0, code=CodeCalib)
-			[pos_p, wgt_p] = REC._Recover(img_p, ker_p, eps_p, code=CodeCalib)
+			[pos_m, wgt_m] = REC._Recover(img_m[0,...][None,...], ker_m, eps_m, code=CodeCalib)
+			[pos_0, wgt_0] = REC._Recover(img_0[0,...][None,...], ker_0, eps_0, code=CodeCalib)
+			[pos_p, wgt_p] = REC._Recover(img_p[0,...][None,...], ker_p, eps_p, code=CodeCalib)
 
 			# Reconstruct images and get errors #
 			rec_m = Reconstruct(ker_m, eps_m[0,0,:,:], pos_m[0], wgt_m[0])
@@ -168,7 +167,7 @@ def SetStr(s): USER.KER_RNG[0] = s
 print("Obtaining original guess...")
 scope_init = INIT.Microscope(CodeCalib)
 img_init, ker_init, eps_init = PREP._Preprocess2(CodeCalib, scope_init.img, scope_init.ker)
-[pos_init, wgt_init] = REC._Recover(img_init, ker_init, eps_init, code=CodeCalib)
+[pos_init, wgt_init] = REC._Recover(img_init[0,...][None,...], ker_init, eps_init, code=CodeCalib)
 rec_init = Reconstruct(ker_init, eps_init[0,0,:,:], pos_init[0], wgt_init[0])
 err_init = Error(img_init[0,0,:,:], eps_init[0,0,:,:], rec_init, wgt_init[0])
 print('\nInitial error: %0.3f\n\n' % (err_init))
@@ -183,7 +182,7 @@ SetSep(sep)
 SetRad(rad)
 scope_opt = INIT.Microscope(CodeCalib)
 img_opt, ker_opt, eps_opt = PREP._Preprocess2(CodeCalib, scope_opt.img, scope_opt.ker)
-[pos_opt, wgt_opt] = REC._Recover(img_opt, ker_opt, eps_opt, code=CodeCalib)
+[pos_opt, wgt_opt] = REC._Recover(img_opt[0,...][None,...], ker_opt, eps_opt, code=CodeCalib)
 rec_opt = Reconstruct(ker_opt, eps_opt[0,0,:,:], pos_opt[0], wgt_opt[0])
 err_opt = Error(img_opt[0,0,:,:], eps_opt[0,0,:,:], rec_opt, wgt_opt[0])
 print('\nCalibrated error: %0.3f\n\n' % (err_opt))

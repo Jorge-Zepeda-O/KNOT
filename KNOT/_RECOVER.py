@@ -496,7 +496,7 @@ class ADMM:
 
 			# Perform Regularizations #
 			Psi = self.Reg_Accuracy(Psi, i)
-			Psi = self.Reg_Sparcity(Psi, np.minimum(np.maximum(2*i/USER.REC_ITER, 1/2), 3/2))
+			Psi = self.Reg_Sparcity(Psi, 1)#np.minimum(np.maximum(2-2*i/USER.REC_ITER, 1), 1/2))
 			Psi = self.Reg_Temporal(Psi)
 
 			# Copy in the new result #

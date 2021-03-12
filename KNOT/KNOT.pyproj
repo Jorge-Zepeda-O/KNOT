@@ -24,7 +24,9 @@
     <Compile Include="calibrate.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="crop.py" />
+    <Compile Include="crop.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main.py" />
     <Compile Include="simulate.py">
       <SubType>Code</SubType>

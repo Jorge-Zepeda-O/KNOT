@@ -14,9 +14,9 @@ import __OPERATION as OP
 UPDATE = True	# Update rois?			#
 VISUAL = True	# Visualize results?	#
 
-Frames = [0, 100]		# <(f, f)> Frame range, does not include end frame. Zero indexed	#
-Roi_cen = [200, 230]	# <(px, px)> Center point of the ROI								#
-Roi_size = [256, 256]		# <(px, px)> Size of the ROI. Keep equal! Else the phase mask simulates incorrectly (BUG) #
+Frames = [710, 760]		# <(f, f)> Frame range, does not include end frame. Zero indexed	#
+Roi_cen = [128, 128]	# <(px, px)> Center point of the ROI								#
+Roi_size = [256, 256]	# <(px, px)> Size of the ROI. Keep equal! Else the phase mask simulates incorrectly (BUG) #
 
 ## Files for processing ##
 DIR = path.dirname(path.abspath(__file__))
@@ -26,7 +26,7 @@ OP._MakeDir(OP.FOLD_IMG)
 
 # If you want to specify files in the folder, uncomment the second line, else comment it out to grab everything in the folder #
 files = glob.glob(FOLD_EXP + '*.tif')
-files = ['Test Cell.tif']
+files = ['test_dense_cell.tif']
 
 ## Additional parameters ##
 # Construct the x and y ranges for cropping #
@@ -62,7 +62,7 @@ for f in files:
 		ax.set_yticklabels([])
 
 		ax = plt.axes(position=[0.5,0,0.5,1])
-		ax.imshow(data[Frames[1],:,:], cmap='gray')
+		ax.imshow(data[Frames[1]-1,:,:], cmap='gray')
 		ax.plot([rng_x[0], rng_x[0], rng_x[-1], rng_x[-1], rng_x[0]], [rng_y[0], rng_y[-1], rng_y[-1], rng_y[0], rng_y[0]], c='r')
 		ax.text(10, 20, "Frame %i" % (Frames[1]), color='w')
 		ax.set_xticklabels([])

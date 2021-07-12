@@ -58,7 +58,7 @@ def RUN(clouds, img, *, code='', update=False, visual=False):
 			VIS._DispLineGrad(ax, seg, p.frm, clr[np.mod(k, len(clr))], linewidth=6)
 			k += 1
 		ax.set_xlim(0, np.shape(img)[3])
-		ax.set_ylim(0, np.shape(img)[2])
+		ax.set_ylim(np.shape(img)[2], 0)
 		
 		# 3D #
 		plt.figure(figsize=(6, 6))
@@ -71,7 +71,7 @@ def RUN(clouds, img, *, code='', update=False, visual=False):
 			VIS._DispLineGrad(ax, seg, p.frm, clr[np.mod(k, len(clr))], linewidth=6)
 			k += 1
 		ax.set_xlim(0, np.shape(img)[3])
-		ax.set_ylim(0, np.shape(img)[2])
+		ax.set_ylim(np.shape(img)[2], 0)
 		ax.set_zlim(0, USER.KER_Z)
 		plt.show()
 	elif(visual and USER.KER_T > 1):

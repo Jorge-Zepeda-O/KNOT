@@ -14,12 +14,11 @@ import _TRACK		as TRK
 
 #%% --- USER PARAMETERS --- %%#
 # Update/Visualize which saved values? #
-UPDATE = {'INI':False, 'PRE':False, 'REC':False, 'SEG':False, 'TRK':True}
+UPDATE = {'INI':True, 'PRE':True, 'REC':True, 'SEG':True, 'TRK':True}
 VISUAL = {'INI':False, 'PRE':False, 'REC':False, 'SEG':False, 'TRK':True}
 
 # Load in which images? #
-CODES = ['roi_Test Bead_(300,300)_(256x256)_(f100-110)', 'roi_Test Cell_(200,230)_(256x256)_(f0-10)']
-#CODES = ['roi_Test Cell_(200,230)_(256x256)_(f0-10)']
+CODES = ['test_beads', 'test_dense_cell', 'test_sparse_cell', 'test_pba_fibrinogen']
 
 #%% INITIALIZATION %%#
 for code in CODES:
@@ -60,5 +59,5 @@ for code in CODES:
 	#%% TRACKING %%#
 	if(__name__ == '__main__'):
 		print('\n----------    Tracking    ----------')
-		traj = TRK.RUN(clouds, scope.img, code=code, update=UPDATE['TRK'], visual=VISUAL['TRK'])
+		traj = TRK.RUN(clouds, img_, code=code, update=UPDATE['TRK'], visual=VISUAL['TRK'])
 		print('\n');

@@ -36,9 +36,9 @@ KER_SEP = 4*WAVELENGTH/(2*NA)				# <um> How far apart are the two DH lobes?	#
 KER_RNG = np.array([2/3*KER_SEP, KER_SEP])	# <um> How much does the DH lobes stretch?	#
 
 # From calibration #
-KER_SEP = 1.000
-APR_RAD = 0.380
-KER_RNG = [1.500]*2
+KER_SEP = 1.300
+APR_RAD = 0.340
+KER_RNG = [1.200]*2
 
 #%% --- SIMULATION --- %%#
 SIM_KER = True		# <bool> Simulate the phase mask kernel?	#
@@ -55,12 +55,12 @@ PAR_FLAG = False	# <bool> Paralellize? (Not yet implemented)	 #
 PAR_CORES = 6		# <int> Number of paralell processes to open #
 
 ### Preprocessing ###
-PRE_BG = APR_RAD*2/3	# <#> Gaussian standard deviation for BG Sub filter				(4/3 R_apr) # 
-PRE_NS = APR_RAD*1/6	# <#> Lorentzian HWHM for noise suppression filter				(2/3 R_apr)	#
-PRE_LT = APR_RAD*3/2	# <#> Gaussian standard deviation for local threshold filter	(9/3 R_apr)	#
+PRE_BG = APR_RAD*4/3	# <#> Gaussian standard deviation for BG Sub filter				(4/3 R_apr) # 
+PRE_NS = APR_RAD*1/3	# <#> Lorentzian HWHM for noise suppression filter				(2/3 R_apr)	#
+PRE_LT = APR_RAD*7/3	# <#> Gaussian standard deviation for local threshold filter	(9/3 R_apr)	#
 PRE_TS = 0				# <int> Temporal smoothing length - set to zero if no smoothing (0 frames)	#
 
-PRE_EPS = 0.75			# <#> Local threshold strength - vary depending on SNR for best results (0.5) #
+PRE_EPS = 0.66			# <#> Local threshold strength - vary depending on SNR for best results (0.5) #
 
 ### Recovery ###
 REC_CHUNK = False		# <bool> Chunk up the image when deconvolving? #
@@ -73,7 +73,7 @@ SEG_SEP = 0.200			# <um> Maximum distance to merge clusters (Not implemented)		#
 SEG_MERGE = 5			# <int> Number of iterations to merge clusters					#
 
 ### Tracking ###
-TRK_RAD = 0.500		# <um> Search radius for tracking candidates			(0.700 um)	#
+TRK_RAD = 0.700		# <um> Search radius for tracking candidates			(0.700 um)	#
 TRK_TOL = 3			# <fr> Number of frames not present before termination	(3 frames)	#
 
 TRK_LEN = 6		# <fr> Maximum number of frames to keep in history	(6 frames)	#

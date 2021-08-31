@@ -5,7 +5,7 @@ A single particle tracking method that does not inherently bias particle localiz
 
 The manuscript is currently in the submission process for the Journal of Physical Chemistry A. We will post a link to the article once it is published.
 
-An instructional video can be found here: https://drive.google.com/file/d/1cFKy2c1eynYgnlCxDtpeQ-IDxbCUJYEW/view?usp=sharing
+An instructional video can be found here: https://drive.google.com/file/d/1wBl0VUSiPSsUd_84Zobfb652NNARvbab/view?usp=sharing  
 It will soon be uploaded to YouTube.
 
 ---

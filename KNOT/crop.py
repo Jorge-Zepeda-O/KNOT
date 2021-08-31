@@ -14,9 +14,9 @@ import __OPERATION as OP
 UPDATE = True	# Update rois?			#
 VISUAL = True	# Visualize results?	#
 
-Frames = [710, 760]		# <(f, f)> Frame range, does not include end frame. Zero indexed	#
-Roi_cen = [128, 128]	# <(px, px)> Center point of the ROI								#
-Roi_size = [256, 256]	# <(px, px)> Size of the ROI. Keep equal! Else the phase mask simulates incorrectly (BUG) #
+Frames = [0, 20]	# <(f, f)> Frame range, does not include end frame. Zero indexed	#
+Roi_cen = [64, 64]	# <(px, px)> Center point of the ROI								#
+Roi_size = [128, 128]	# <(px, px)> Size of the ROI. Keep equal! Else the phase mask simulates incorrectly (BUG) #
 
 ## Files for processing ##
 DIR = path.dirname(path.abspath(__file__))
@@ -26,7 +26,7 @@ OP._MakeDir(OP.FOLD_IMG)
 
 # If you want to specify files in the folder, uncomment the second line, else comment it out to grab everything in the folder #
 files = glob.glob(FOLD_EXP + '*.tif')
-files = ['test_dense_cell.tif']
+files = ['test_bead.tif']
 
 ## Additional parameters ##
 # Construct the x and y ranges for cropping #

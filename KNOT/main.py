@@ -15,10 +15,10 @@ import _TRACK		as TRK
 #%% --- USER PARAMETERS --- %%#
 # Update/Visualize which saved values? #
 UPDATE = {'INI':True, 'PRE':True, 'REC':True, 'SEG':True, 'TRK':True}
-VISUAL = {'INI':False, 'PRE':False, 'REC':False, 'SEG':False, 'TRK':True}
+VISUAL = {'INI':False, 'PRE':False, 'REC':False, 'SEG':False, 'TRK':False}
 
 # Load in which images? #
-CODES = ['test_beads', 'test_dense_cell', 'test_sparse_cell', 'test_pba_fibrinogen']
+CODES = ['test_beads', 'test_cell', 'test_cell_393P_Vector', 'test_pba_fibrinogen']
 
 #%% INITIALIZATION %%#
 for code in CODES:
